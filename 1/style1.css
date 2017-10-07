@@ -1,0 +1,88 @@
+/*Макет 1*/
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.wrapper {
+  width: 1300px;
+  outline: 1px solid black;
+  margin: 5px auto;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.header,
+.sidebar-left,
+.content,
+.sidebar-right,
+.footer {
+  outline: 1px solid black;
+}
+
+.image {
+  float: left;
+  margin-top: 10px;
+}
+
+.nav ul {
+  border: 1px solid black;
+  display: inline-flex;
+}
+
+.nav li,
+.nav a {
+  list-style-type: none;
+  text-decoration: none;
+  font-size: 22px;
+  padding: 7px;
+}
+
+.nav h2 {
+  padding: 10px
+}
+
+.nav a.red:link,
+.nav a.red:visited {
+  text-decoration: underline;
+  color: red;
+}
+
+.nav a:hover {
+  text-decoration: underline;
+  color: red;
+}
+
+.header,
+.footer {
+  width:  100%;
+  height: 250px;
+}
+
+.content {
+  width: 830px;
+}
+
+.content h1 {
+  font-size: 38px;
+  padding: 0 0 20px 20px;
+}
+
+.content p {
+  padding: 0 30px 20px 30px;
+  font-size: 22px;
+  text-align: justify;
+}
+
+.sidebar-left,
+.sidebar-right {
+  font-size: 22px;
+  width: 235px;
+}
+
+.footer h2 {
+  text-align: center;
+  position: relative;
+  top: 90%;
+  vertical-align: bottom;
+}
