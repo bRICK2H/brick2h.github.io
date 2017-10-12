@@ -1,0 +1,179 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: #B17E4F;
+}
+
+.wrapper {
+  width: 960px;
+  font: 14px "Trevuchet MS", Arial, Helvetica serif;
+  background-color: white;
+  border: 1px solid white;
+  margin: 0 auto 40px;
+}
+
+/*HEADER*/
+
+.logo {
+  width: 960px;
+  height: 70px;
+  margin: 0 auto;
+  padding-top: 50px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo h1 {
+  padding-left: 30px;
+  font: bold 43px "Trebuchet MS", Arial, Helvetica serif;
+  color: white;
+}
+
+.logo p {
+  padding-right: 30px;
+  font: 16px "Trebuchet MS", Arial, Helvetica serif;
+  color: #CEB6A4;
+}
+
+.nav ul {
+  width: 930px;
+  background-color: black;
+  margin: 15px;
+  display: flex;
+}
+
+.nav li {
+  list-style-type: none;
+}
+
+.nav a {
+  text-decoration: none;
+  text-transform: uppercase;
+  font-size: 12px;
+  color: white;
+  padding: 20px 70.9px;
+  display: inline-block;
+}
+
+
+a.first {
+  background-color: #1B3039;
+}
+
+.nav a:hover {
+  background-color: #1B3039;
+}
+
+.figure img {
+  width: 930px;
+  height: 220px;
+  margin-left: 15px;
+}
+
+/*CONTENT-ASIDE*/
+
+.content-aside {
+  width: 960px;
+  display: flex;
+  justify-content: space-between;
+}
+
+/*CONTENT*/
+
+.content {
+  width: 600px;
+  box-sizing: border-box;
+  margin: 0 15px;
+  padding: 0 25px 0 15px;
+}
+
+.section h2 {
+  font-size: 36px;
+  color: #9F6841;
+}
+
+.section p {
+  font-size: 13px;
+  line-height: 2;
+  color: #444;
+  padding-bottom: 30px;
+}
+
+.section a {
+  text-decoration: none;
+  color: #96AE3E;
+}
+
+span {
+  border-left: 1px solid #444;
+  border-right: 1px solid #444;
+  padding: 0 7px;
+  margin: 0 3px;
+}
+
+/*ASIDE*/
+
+.aside {
+  width: 310px;
+}
+
+.aside .article {
+  border: 1px solid #E8E6DE;
+  margin: 20px 15px 20px 0;
+  background-color: #E8E6DE;
+}
+
+.aside h3 {
+  font-size: 20px;
+  color: white;
+  background-color: #5D9EBD;
+  padding: 9px 0 9px 15px;
+  margin: 7px 7px 20px 7px;
+}
+
+.box-odd {
+  height: 245px;
+}
+
+.article:nth-child(odd) p {
+  font-size: 13px;
+  color: #96AE3E;
+  line-height: 2.4;
+  border-bottom: 1px solid #e0dfdf;
+  padding: 0 15px;
+  margin: 0 7px;
+}
+
+.box-even {
+  height: 220px;
+}
+
+.article:nth-child(even) p {
+  font-size: 13px;
+  color: #444;
+  line-height: 2;
+  padding: 0 20px;
+}
+
+/*FOOTER*/
+.footer {
+  height: 70px;
+  background-color: #D1E4A7;
+  margin: 40px 15px 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.footer p {
+  font-size: 12px;
+}
+
+.footer a {
+  text-decoration: none;
+  color: #96AE3E;
+}
