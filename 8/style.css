@@ -1,0 +1,182 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font: 14px "Trebuchet MS", Arial, Helvetica, sans-serif;
+  background-color: #dddcdc;
+  padding: 40px 0;
+}
+
+.wrapper {
+  width: 960px;
+  background-color: #fff;
+  margin: 0 auto;
+}
+
+  /*HEADER*/
+
+header .logo {
+  height: 120px;
+  padding: 0 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo h1,
+.logo a {
+  font: 55px Georgia, Helvetica, serif;
+  color: black;
+  text-decoration: none;
+  letter-spacing: -3px;
+}
+
+.logo p {
+  font: 19px Georgia, Helvetica, serif;
+  color: #888;
+}
+
+  /*NAV*/
+
+nav ul {
+  height: 80px;
+  background-color: #F0A003;
+  display: flex;
+  justify-content: space-around;
+}
+
+nav li {
+  list-style-type: none;
+  margin-top: 25px;
+}
+
+nav a {
+  text-decoration: none;
+  font-size: 17px;
+  color: #F7DAAF;
+}
+
+ /*FIGURE*/
+
+figure {
+   margin: 55px 0 65px;
+ }
+
+  /*MAIN*/
+
+.main {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 30px;
+}
+
+  /*ASIDE*/
+
+aside {
+  flex-basis: 260px;
+}
+
+article h3,
+section h3 {
+  font: 24px Georgia, Helvetica, serif;
+  letter-spacing: -1px;
+}
+
+section {
+  padding: 50px 0 20px;
+}
+
+section p {
+  line-height: 2;
+}
+
+article h3,
+section h3 {
+  padding-bottom: 10px;
+}
+
+article li {
+  line-height: 3;
+  list-style-type: none;
+  background: url(img/play.gif) 0 no-repeat;
+  border-bottom: 1px solid #dbd9d9;
+  padding-left: 15px;
+}
+
+article a,
+.content-box p a,
+footer a {
+  color: #F0A003;
+}
+
+article a:hover,
+.content-box a:hover {
+  text-decoration: none;
+}
+  /*CONTENT*/
+
+.content {
+  flex-basis: 570px;
+}
+
+.content-box h2 {
+  font: 43px Georgia, Helvetica, serif;
+  letter-spacing: -2px;
+  padding-bottom: 10px;
+}
+
+.content-box h2 a {
+  text-decoration: none;
+  color: #000;
+}
+
+.content-box p {
+  text-align: justify;
+  line-height: 1.8;
+  padding-bottom: 25px;
+}
+
+.bord-right {
+  border-right: 1px solid #999;
+  padding-right: 4px;
+}
+
+.bord-left {
+  border-left: 1px solid #999;
+  padding-left: 4px;
+}
+
+.content-box span {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.content-box span a {
+  border: 1px solid #dbd9d9;
+  padding: 5px;
+  text-decoration: none;
+  margin: 0 30px 70px 0;
+  color: #F0A003;
+}
+
+.content-box span a:hover {
+  background-color: #F7DAAF;
+}
+
+  /*FOOTER*/
+
+footer {
+  font-size: 13px;
+  border-top: 1px solid #dddcdc;
+  height: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+a.bord {
+  border-right: 1px solid #999;
+  padding-right: 4px;
+}
