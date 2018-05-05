@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Игра с числами</title>
+</head>
+<body>
+  <div class="parent">
+    <p>Нажимайте на числа в порядке иx возрастания</p>
+    <button id="restart">Начать заново</button>
+    <p id="level"></p>
+    <p class="text">Время: <span id="timer">5</span> секунд</p>
+    <p id="message"></p>
+  </div>
+
+  <style>
+    body {
+      background: #ccc;
+    }
+    .parent {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .text {
+      font-style: italic;
+    }
+
+    table {
+      margin: 20px auto;
+      text-align: center;
+      font-size: 22px;
+      cursor: pointer;
+      background: #666;
+      color: #fff;
+    }
+
+    #timer {
+      font-size: 22px;
+      font-weight: bold;
+      font-style: normal;
+    }
+
+    #restart {
+      font: 18px 'Times New Room', serif;
+      color: #fff;
+      border-width: 0;
+      background: #555;
+      outline: none;
+      border-radius: 15px;
+      padding: 5px 10px;
+      cursor: pointer;
+    }
+
+    #message,
+    #level {
+      font-size: 18px;
+      font-weight: bold;
+    }
+
+    #message {
+      font-size: 20px;
+    }
+  </style>
+
+  <script>
+    /**
+     * Глобальная переменная n.
+     * 1. Множитель для длинны одномерного массива.
+     * 2. Шаг вырезки для многомерного массива.
+     * 3. Длинна рядов и столбцов таблицы.
+     **/
+    var n = 2;
+
+    // Вывод дефолтной таблицы.
+    createTable();
+
+    // Удаляет предыдущую таблицу и выводит новую, увеличенную.
+    restart();
+
+    // Запускаем логику игры
+    start();
+
+    // Сообщение первого уровня
+    level('Уровень 1');
+
+    /**
+     * Функция роботы логики игры для разных условий
+     **/
+    function start() {
+      var count = 0;
+      var table = document.getElementsByTagName('table')[0];
+
+      table.addEventListener('click', function logic(event) {
+        var target = event.target;
+        target.style.backgroundColor = 'green';
+        var timer = document.getElementById('timer');
+        var max = n * n;
+        count++;
+
+        if (target.innerHTML != count) {
+          target.style.backgroundColor = 'red';
+          message('Вы совершили ошибку! Начните заново');
+          stopTimer();
+          blockTable(logic);
+
+          if (timer.innerHTML == 0) {
+            blockTable(logic);
+          }
+        } else if (count == max) {
+          message('Вы выйграли!');
+          blockTable(logic);
+          stopTimer();
+
+          setTimeout(function () {
+            n++;
+            count = 0;
+            timer.innerHTML = 5;
+            timer.innerHTML *= (n - 1);
+            level('Уровень ' + (n - 1));
+            document.body.removeChild(table);
+            message('');
+            createTable();
+            start();
+          }, 2000);
+        } else if (count == 1) {
+          startTimer();
+        }
+      });
+    }
+
+    // Функция блокирует таблицу
+    function blockTable(anim) {
+      document.getElementsByTagName('table')[0].removeEventListener('click', anim);
+    }
+
+    // Запуск таймера
+    function startTimer() {
+      startTime = setInterval(timer, 1000);
+    }
+
+    // Остановка таймера
+    function stopTimer() {
+      clearInterval(startTime);
+    }
+
+    // Логика таймера
+    function timer() {
+      var timer = document.getElementById('timer');
+      timer.innerHTML = +timer.innerHTML - 1;
+
+      if (timer.innerHTML == 0) {
+        document.getElementsByTagName('table')[0].style.backgroundColor = 'red';
+        stopTimer();
+        message('Вы проиграли! Начните заново');
+      }
+    }
+
+    /**
+     * Функция сбрасывает таблицу на дефолтное состояние.
+     **/
+    function restart() {
+      var restart = document.getElementById('restart');
+      restart.addEventListener('click', function () {
+        var table = document.getElementsByTagName('table')[0];
+        document.body.removeChild(table);
+        n = 2;
+        createTable();
+        start();
+        level('Уровень 1');
+        message('');
+        document.getElementById('timer').innerHTML = 5;
+      });
+    }
+
+    /**
+     * Функция передает сообщение в зависимотси условия игры выйграл/проиграл.
+     **/
+    function message(text) {
+      var message = document.getElementById('message');
+      message.innerHTML = text;
+    }
+
+    /**
+     * Функция передает сообщение от уровне сложности.
+     **/
+    function level(text) {
+      var level = document.getElementById('level');
+      level.innerHTML = text;
+    }
+
+    /**
+     * Создаем одномерный массив, длинна массива это множетель глобальной
+     * переменной x. Возвращаем получившийся массив.
+     **/
+    function createArray() {
+      var numbers = n * n;
+      var array = [];
+
+      for (var i = 1; i <= numbers; i++) {
+        array.push(i);
+      } return array;
+    }
+
+    /**
+     * Создаем рандомайзер, из созданного массива array.
+     * Возвращаем рандомный массив.
+     **/
+    function shuffle() {
+      var array = createArray();
+      var length = array.length;
+      var shuffleArray = [];
+      var r;
+      var take;
+
+      for (var i = 0; i < length; i++) {
+        r = Math.floor(Math.random() * array.length);
+        take = array.splice(r, 1)[0];
+        shuffleArray.push(take);
+      } return shuffleArray;
+    }
+
+    /**
+     * Создаем многомерный массив из созданного рандомного массива.
+     * Возвращаем рандомный многомерный массив.
+     **/
+    function createMultiArray() {
+      var shuffleArray = shuffle();
+      var multiArray = [];
+      var take;
+
+      for (var i = 0; i < shuffleArray.length; i++) {
+        take = shuffleArray.splice(0, n);
+        multiArray.push(take);
+      } return multiArray;
+    }
+
+    /**
+     * Создаем таблицу, и выводим получившийся рандомный многомерный массив
+     **/
+    function createTable() {
+      var multiArray = createMultiArray();
+      var table = document.createElement('table');
+      table.style.borderCollapse = 'collapse';
+      document.body.appendChild(table);
+
+      for (var i = 0; i < n; i++) {
+        var tr = document.createElement('tr');
+        table.appendChild(tr);
+
+        for (var j = 0; j < n; j++) {
+          var td = document.createElement('td');
+          td.innerHTML = multiArray[i][j];
+          td.style.cssText = 'border: 1px solid #fff; width: 50px; height: 50px';
+          td.classList.add('cells');
+          tr.appendChild(td);
+        }
+      }
+    }
+  </script>
+</body>
+</html>
