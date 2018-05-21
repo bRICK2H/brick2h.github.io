@@ -1,0 +1,839 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Блокнот</title>
+</head>
+<body>
+
+  <div id="container">
+    <div id="container__block">
+      <h1>Календарь</h1>
+      <div id="container__calendar">
+        <div class="block__time">
+          <p class="time">1</p>
+          <p class="date">2</p>
+        </div>
+        <div class="block_calendar">
+          <div class="block_event">
+            <p class="block_date">Дата</p>
+            <div class="block_button">
+              <button class="previous_button">&lt;</button>
+              <button class="next_button">&gt;</button>
+            </div>
+          </div>
+        </div>
+        <div id="container__prompt">
+          <div id="block__prompt">
+            <div id="triangle"></div>
+            <span id="prompt">Выберите дату!</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <style>
+    @import url('https://fonts.googleapis.com/css?family=Fira+Sans');
+    body {
+      font-family: 'Fira Sans', sans-serif;
+    }
+
+    #container {
+      width: 100%;
+      height: 100vh;
+      background: #eee;
+    }
+
+    #container__block {
+      width: 500px;
+      height: 100%;
+      margin: auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    #container__calendar {
+      position: relative;
+      width: 410px;
+      background: #333;
+      border-radius: 5px;
+      margin: auto;
+      box-shadow: 4px 4px 30px rgba(0, 0, 0, .6),
+                 -4px -4px 30px rgba(0, 0, 0, .6);
+    }
+
+    #container__prompt {
+      position: absolute;
+      left: 410px;
+      top: 578px;
+      display: none;
+    }
+
+    #block__prompt {
+      position: relative;
+      display: flex;
+      justify-content: center;
+    }
+
+    #triangle {
+      width: 0;
+      height: 0;
+      border-left: 26px solid #333;
+      border-bottom: 13px solid transparent;
+      border-top: 13px solid transparent;
+      left: 410px;
+      top: 575px;
+    }
+
+    #prompt {
+      width: 120px;
+      font-size: 14px;
+      line-height: 26px;
+      text-align: center;
+      color: #222;
+    }
+
+    .block__time {
+      width: 100%;
+      height: 100px;
+      border-bottom: 1px solid #444;
+    }
+
+    .time,
+    .date {
+      text-align: center;
+      color: #fff;
+    }
+
+    .time {
+      font-size: 32px;
+    }
+
+    .block_calendar {
+      width: 100%;
+      height: 415px;
+      padding-bottom: 15px;
+      border-bottom: 1px solid #444;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+    }
+
+    .block_event {
+      height: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-left: 20px;
+      margin-right: 20px;
+    }
+
+    .block_date {
+      font-size: 20px;
+      color: #fff;
+    }
+
+    .table_days {
+      height: 40px;
+      background: #666;
+      margin-bottom: 10px;
+      margin-left: 3px;
+      margin-right: 3px;
+    }
+
+    .table_days .cells {
+      color: #111;
+    }
+
+    .table_days .cells:not(:last-child) {
+      border-right: 1px solid #333;
+    }
+
+    .table_numbers {
+      height: 300px;
+      margin-left: 2px;
+      margin-right: 2px;
+    }
+
+    .cells,
+    .numbers,
+    .previous_month {
+      font-size: 18px;
+      text-align: center;
+      width: 30px;
+      color: #fff;
+    }
+
+    .numbers:hover {
+      background: #444;
+      border-radius: 3px;
+      cursor: pointer;
+    }
+
+    .previous_month {
+      color: #999;
+      border: 1px solid #444;
+      border-radius: 3px;
+    }
+
+    .weekend_days {
+      color: #070;
+    }
+
+    .this_day {
+      background: #444;
+      border-radius: 3px;
+      font-weight: bold;
+    }
+
+    .previous_button,
+    .next_button {
+      width: 50px;
+      background: none;
+      color: #999;
+      font-size: 24px;
+      margin-left: 20px;
+      cursor: pointer;
+      border: 1px solid #444;
+      border-radius: 5px;
+      outline: none;
+    }
+
+    .previous_button:hover,
+    .next_button:hover {
+      background: #444;
+    }
+
+    #calendar_task {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    #calendar_task.change_style {
+      height: 150px;
+      flex-direction: row-reverse;
+    }
+
+
+    .button_task,
+    .button_task-remove,
+    .button_task-save {
+      width: 25px;
+      height: 25px;
+      line-height: 22px;
+      padding-left: 6px;
+      text-align: center;
+      background: none;
+      border: 1px solid #444;
+      border-radius: 5px;
+      margin-right: 20px;
+      margin-bottom: 10px;
+      margin-top: 10px;
+      font-size: 20px;
+      cursor: pointer;
+      outline: none;
+      color: #999;
+      display: flex;
+      justify-content: center;
+    }
+
+    .button_task:hover,
+    .button_task-remove:hover,
+    .button_task-save:hover {
+      background: #444;
+    }
+
+    .button_task-save {
+      color: #080;
+    }
+
+    .perform_date {
+      margin-left: 18px;
+      color: #fff;
+      font-size: 14px;
+    }
+
+    .parent_buttons {
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+    }
+
+    .parent_text {
+      height: 100%;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    #over_task {
+      width: 310px;
+      height: 80px;
+      background: #555;
+      border: 1px solid #666;
+      border-radius: 5px;
+      resize: none;
+      outline: none;
+      color: #fff;
+    }
+
+    #over_task:focus {
+      background: #666;
+    }
+
+    .label {
+      background: linear-gradient(45deg, #a00 0, #a00 7px, #333 0);
+      border: 1px solid #444;
+      border-radius: 3px;
+    }
+
+    #calendar_task .task_label {
+      width: 220px;
+      word-break: break-all;
+      color: #999;
+      font-size: 14px;
+    }
+  </style>
+
+  <script>
+    var previousButton = document.querySelector('.previous_button');
+    var nextButton = document.querySelector('.next_button');
+    var tableN = document.querySelector('.table_numbers');
+    var tableD = document.querySelector('.table_days');
+    var calendarTask = document.getElementById('calendar_task');
+    var count = 0;
+    var objMonth = {};
+
+    // Функция выводит дату и время
+    printAllElements();
+
+    // Функция выводит предыдущий месяц
+    eventPrevious();
+
+    // Функция выводит следующий месяц
+    eventNext();
+
+    /**
+     * Функция события переключения календаря на предыдущий месяц
+     **/
+    function eventPrevious() {
+      previousButton.addEventListener('click', function () {
+        var tableN = document.querySelector('.table_numbers');
+        var tableD = document.querySelector('.table_days');
+        var calendarTask = document.getElementById('calendar_task');
+        tableN.parentElement.removeChild(tableN);
+        tableD.parentElement.removeChild(tableD);
+        calendarTask.parentElement.removeChild(calendarTask);
+        count--;
+        printAllElements();
+      });
+    }
+
+    /**
+     * Функция события переключения календаря на следующий месяц
+     **/
+    function eventNext() {
+      nextButton.addEventListener('click', function () {
+        var tableN = document.querySelector('.table_numbers');
+        var tableD = document.querySelector('.table_days');
+        var calendarTask = document.getElementById('calendar_task');
+        tableN.parentElement.removeChild(tableN);
+        tableD.parentElement.removeChild(tableD);
+        calendarTask.parentElement.removeChild(calendarTask);
+        count++;
+        printAllElements();
+      });
+    }
+
+    /**
+     * Функция события кнопки, для добавления задач.
+     **/
+    function eventForAddTask() {
+      var buttonTask = document.querySelector('.button_task');
+
+      buttonTask.addEventListener('click', function add() {
+        var performDate = document.querySelector('.perform_date');
+        var parentButtons = document.querySelector('.parent_buttons');
+        var containerPrompt = document.getElementById('container__prompt');
+        var taskLabel = document.querySelector('.task_label');
+        containerPrompt.style.display = 'block';
+        this.setAttribute('title', 'Сначало выберите день');
+        var performDateText = performDate.innerHTML;
+
+        if (performDate.innerHTML != '') {
+          var calendarTask = document.getElementById('calendar_task');
+          calendarTask.classList.add('change_style');
+          containerPrompt.style.display = 'none';
+          this.removeAttribute('title');
+          createButtonSaveTask(parentButtons);
+          createButtonRemoveTask(parentButtons);
+          performDate.parentNode.removeChild(performDate);
+          this.removeEventListener('click', add);
+          createDivForText(calendarTask, performDateText);
+          eventForRemoveTask();
+          eventForSaveTask();
+        }
+
+        if (taskLabel != null) {
+          taskLabel.parentNode.removeChild(taskLabel);
+        }
+      });
+    }
+
+    /**
+     * Функция удаляет панель задач
+     **/
+    function eventForRemoveTask() {
+      var buttonRemoveTask = document.querySelector('.button_task-remove');
+
+      buttonRemoveTask.addEventListener('click', function () {
+        var containerCalendar = document.getElementById('container__calendar');
+        var calendarTask = document.getElementById('calendar_task');
+        calendarTask.parentNode.removeChild(calendarTask);
+
+        createParentDivForEvents(containerCalendar);
+        eventForAddTask();
+        createTextForShowTask();
+        showEventTaskInCalendar();
+      });
+    }
+
+    /**
+     * Функция создает объект и сохраняет записанную задачу.
+     **/
+    function eventForSaveTask() {
+      var buttonSaveTask = document.querySelector('.button_task-save');
+      var overTask = document.getElementById('over_task');
+      var objDate = {};
+
+      buttonSaveTask.addEventListener('click', function () {
+
+        var performDate = document.querySelector('.perform_date');
+        var fromDate = performDate.innerHTML.lastIndexOf(' ');
+        var strDateNum = performDate.innerHTML.substr(fromDate + 1);
+
+        var blockDate = document.querySelector('.block_date');
+        var fromMonth = blockDate.innerHTML.indexOf(' ');
+        var strMonth = blockDate.innerHTML.substr(0, fromMonth);
+
+        objDate[strDateNum] = overTask.value;
+        addLabelTask(strDateNum, overTask);
+        objMonth[strMonth] = objDate;
+        overTask.value = '';
+
+      });
+
+      showEventTaskInMenu(objDate, overTask);
+    }
+
+    /**
+     * Функция при сохранении задачи, добавляет отметку
+     **/
+    function addLabelTask(strDateNum, overTask) {
+      var numbers = document.querySelectorAll('.numbers');
+      var taskLabel = document.querySelector('.task_label');
+
+      for (var i = 0; i < numbers.length; i++) {
+        if (numbers[i].innerHTML == strDateNum) {
+          numbers[i].classList.add('label');
+          numbers[i].setAttribute('title', overTask.value);
+        }
+      }
+    }
+
+    /**
+     * Функция при открытом меню добавления показывает добавленные задачи
+     **/
+    function showEventTaskInMenu(objDate, overTask) {
+      var numbers = document.querySelectorAll('.numbers');
+      var taskLabel = document.querySelector('.task_label');
+
+      for (var i = 0; i < numbers.length; i++) {
+        numbers[i].addEventListener('click', function (e) {
+          overTask.value = e.target.getAttribute('title');
+        });
+      }
+    }
+
+    /**
+     * Функция при закрытом меню добавления показывает добавленные задачи
+     **/
+    function showEventTaskInCalendar() {
+      var numbers = document.querySelectorAll('.numbers');
+      var taskLabel = document.querySelector('.task_label');
+
+      for (var i = 0; i < numbers.length; i++) {
+        numbers[i].addEventListener('click', function (e) {
+          if (e.target.className == 'numbers label') {
+            taskLabel.innerHTML = e.target.getAttribute('title');
+          } else {
+            taskLabel.innerHTML = '';
+          }
+        });
+      }
+    }
+
+    /**
+     * Функция создает область текста, для которго добавлены задачи
+     **/
+    function createTextForShowTask() {
+      var performDate = document.querySelector('.perform_date');
+      var p = document.createElement('p');
+      p.innerHTML = '';
+      p.classList.add('task_label');
+      performDate.parentNode.insertBefore(p, performDate.nextSibling);
+    }
+
+    /**
+     * Функция создает див элемент для кнопки
+     **/
+    function createParentDivForEvents(containerCalendar) {
+      var parentDiv = document.createElement('div');
+      parentDiv.id = 'calendar_task';
+      containerCalendar.appendChild(parentDiv);
+      createLeftTextDate(parentDiv);
+      createDivForButtons(parentDiv);
+    }
+
+    /**
+     * Функция создает оболочку div для кнопок
+     **/
+    function createDivForButtons(parentDiv) {
+      var div = document.createElement('div');
+      div.classList.add('parent_buttons');
+      parentDiv.appendChild(div);
+      createButtonAddTask(div);
+    }
+
+    /**
+     * Функция создает оболочку div для кнопок
+     **/
+    function createDivForText(parent, performDateText) {
+      var div = document.createElement('div');
+      div.classList.add('parent_text');
+      parent.appendChild(div);
+      createMiddleTextDate(div, performDateText);
+      createTextarea(div);
+    }
+
+    /**
+     * Функция создает кнопку для добавления задач
+     **/
+    function createButtonAddTask(div) {
+      var button = document.createElement('button');
+      button.getAttribute('type', 'button');
+      button.innerHTML = '&#43;';
+      button.classList.add('button_task');
+      div.appendChild(button);
+    }
+
+    /**
+     * Функция создает кнопку для удаления панели задач
+     **/
+    function createButtonRemoveTask(parentDiv) {
+      var button = document.createElement('button');
+      button.getAttribute('type', 'button');
+      button.innerHTML = '&#8722;';
+      button.classList.add('button_task-remove');
+      parentDiv.appendChild(button);
+    }
+
+    /**
+     * Функция создает кнопку для сохранения события
+     **/
+    function createButtonSaveTask(parentDiv) {
+      var button = document.createElement('button');
+      button.getAttribute('type', 'button');
+      button.innerHTML = '&#10003;';
+      button.classList.add('button_task-save');
+      parentDiv.appendChild(button);
+    }
+
+    /**
+     * Функция создает область для текста где будет выбранная дата
+     **/
+    function createLeftTextDate(div) {
+      var p = document.createElement('p');
+      p.classList.add('perform_date');
+      div.appendChild(p);
+    }
+
+    /**
+     * Функция создает область для текста где будет выбранная дата
+     **/
+    function createMiddleTextDate(div, preformDateText) {
+      var p = document.createElement('p');
+      p.innerHTML = preformDateText;
+      p.classList.add('perform_date');
+      div.appendChild(p);
+    }
+
+    /**
+     * Функция создает область для текста где будет записываться задача
+     **/
+    function createTextarea(parent) {
+      var textarea = document.createElement('textarea');
+      textarea.id = 'over_task';
+      textarea.setAttribute('placeholder', 'Введите событие..');
+      parent.appendChild(textarea);
+    }
+
+    /**
+     * Функция события для добавления выбранной даты
+     **/
+    function eventPerformDate(dayWeek) {
+      var numbers = document.querySelectorAll('.numbers');
+
+      for (var i = 0; i < numbers.length; i++) {
+        numbers[i].addEventListener('click', function (e) {
+          var containerPrompt = document.getElementById('container__prompt');
+          var performDate = document.querySelector('.perform_date');
+          var day = +e.target.dataset.days + 1;
+          performDate.innerHTML = dayWeek[day] + ', ' + e.target.innerHTML;
+          containerPrompt.style.display = 'none';
+        });
+      }
+    }
+
+    /**
+     * Функция переменных, выводит время и дату.
+     **/
+    function printAllElements() {
+      var dayWeek = [
+        'Воскресенье', 'Понедельник', 'Вторник',
+        'Среда', 'Четверг', 'Пятница', 'Суббота',
+      ];
+      var dayWeekMini = ['Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб', 'Вс'];
+      var month = [
+        'Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь',
+        'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь',
+      ];
+      var date = document.querySelector('.date');
+      var time = document.querySelector('.time');
+      var blockCalendar = document.querySelector('.block_calendar');
+      var containerCalendar = document.getElementById('container__calendar');
+      var blockDate = document.querySelector('.block_date');
+      var d = new Date();
+      var lastNumberMonth = 32 - new Date(d.getFullYear(), d.getMonth(), 32).getDate();
+      var setMonth = d.setMonth(d.getMonth() + count);
+
+      getTime(d, time);
+      getDate(dayWeek, month, date);
+      printTableDays(dayWeekMini, blockCalendar);
+      printTableNumbers(d, blockCalendar);
+      getMainDate(d, blockDate, month);
+      getDayStyle(d);
+      getWeekendDays(d, lastNumberMonth);
+      createParentDivForEvents(containerCalendar);
+      eventForAddTask();
+      eventPerformDate(dayWeek);
+    }
+
+    /**
+     * Функция выводит таблицу с числами месяца
+     **/
+    function printTableNumbers(d, blockCalendar) {
+      var table = createTable(blockCalendar);
+      document.querySelector('.table_numbers').classList.remove('table_days');
+      var thisMonth = new Date(d.getFullYear(), d.getMonth(), 1);
+      var nextMonth = new Date(d.getFullYear(), d.getMonth(), 32);
+      var firstDay = thisMonth.getDay() - 1;
+      var notThisMonthStyle = 'next_month';
+
+      if (firstDay < 0) {
+        firstDay = 6;
+      }
+
+      var previous = previousMonth(d, firstDay, j);
+      for (var i = 0; i < 6; i++) {
+        var tr = createRows(table);
+        for (var j = 0; j < 7; j++) {
+          if (j < firstDay && i == 0) {
+            createPreviousNumbers(tr, previous[j], 'previous_month');
+          } else {
+            if (thisMonth.getMonth() != nextMonth.getMonth()) {
+              createThisNumbers(tr, thisMonth.getDate());
+              thisMonth.setDate(thisMonth.getDate() + 1);
+            } else {
+              createNextNumbers(tr, nextMonth.getDate(), 'previous_month');
+              nextMonth.setDate(nextMonth.getDate() + 1);
+            }
+          }
+        }
+      }
+    }
+
+    /**
+     * Функция выводит выходные дни месяца.
+     **/
+    function getWeekendDays(d, lastNumberMonth) {
+      var numbers = document.querySelectorAll('.numbers');
+
+      for (var j = 0; j < numbers.length; j++) {
+        var weekendDays = new Date(d.getFullYear(), d.getMonth(), j).getDay();
+        numbers[j].setAttribute('data-days', weekendDays);
+        if (weekendDays == 6 || weekendDays == 5) {
+          numbers[j].classList.add('weekend_days');
+        }
+      }
+
+    }
+
+    /**
+     * Функция выводит стиль для сегодняшнего дня.
+     **/
+    function getDayStyle(d) {
+      if (count == 0) {
+        document.querySelectorAll('.numbers')[d.getDate() - 1].classList.add('this_day');
+      }
+    }
+
+    /**
+     * Функция выводит массив последних дней, предыдущего месяца.
+     **/
+    function previousMonth(d, firstDay, j) {
+      var previous = 32 - new Date(d.getFullYear(), d.getMonth() - 1, 32).getDate();
+      var arr = [];
+      for (var i = 1; i <= previous; i++) {
+        arr.push(i);
+      }
+
+      var x = arr.reverse();
+
+      var spl = arr.splice(j, firstDay);
+      x = spl.reverse();
+
+      return x;
+    }
+
+    /**
+     * Функция выводит все дни недели таблицы
+     **/
+    function printTableDays(dayWeekMini, blockCalendar) {
+      var table = createTableForDays(blockCalendar);
+      var tr = createRows(table);
+
+      for (var i = 0; i < 7; i++) {
+        createCells(tr, dayWeekMini[i]);
+      }
+    }
+
+    /**
+     * Функция создает таблицу
+     **/
+    function createTable(blockCalendar) {
+      var table = document.createElement('table');
+      table.classList.add('table_numbers');
+      blockCalendar.appendChild(table);
+
+      return table;
+    }
+
+    /**
+     * Функция создает таблицу для дней недели
+     **/
+    function createTableForDays(blockCalendar) {
+      var table = document.createElement('table');
+      table.classList.add('table_days');
+      blockCalendar.appendChild(table);
+
+      return table;
+    }
+
+    /**
+     * Функция создает ряды таблицы
+     **/
+    function createRows(table) {
+      var tr = document.createElement('tr');
+      table.appendChild(tr);
+
+      return tr;
+    }
+
+    /**
+     * Функция создает ячеки таблиц для дней недели
+     **/
+    function createCells(tr, num) {
+      var td = document.createElement('td');
+      td.classList.add('cells');
+      td.innerHTML = num;
+      tr.appendChild(td);
+    }
+
+    /**
+     * Функция создает ячеки таблиц для дат этого месяца
+     **/
+    function createThisNumbers(tr, num) {
+      var td = document.createElement('td');
+      td.classList.add('numbers');
+      td.innerHTML = num;
+      tr.appendChild(td);
+    }
+
+    /**
+     * Функция создает ячеки таблиц для дат предыдущего месяца
+     **/
+    function createPreviousNumbers(tr, num, notThisMonthStyle) {
+      var td = document.createElement('td');
+      td.classList.add(notThisMonthStyle);
+      td.innerHTML = num;
+      tr.appendChild(td);
+    }
+
+    /**
+     * Функция создает ячеки таблиц для дат следующего месяца
+     **/
+    function createNextNumbers(tr, num, notThisMonthStyle) {
+      var td = document.createElement('td');
+      td.classList.add(notThisMonthStyle);
+      td.innerHTML = num;
+      tr.appendChild(td);
+    }
+
+    /**
+     * Функция события, получает время в настоящее момент
+     **/
+    function getTime(d, time) {
+      window.addEventListener('load', function t() {
+        d.setSeconds(d.getSeconds() + 1);
+        time.innerHTML = getZero(d.getHours()) + ':' +
+        getZero(d.getMinutes()) + ':' + getZero(d.getSeconds());
+        setTimeout(t, 1000);
+      });
+    }
+
+    /**
+     * Функция проверки времени, добавляет 0 перед числом
+     **/
+    function getZero(s) {
+      if (s >= 0 && s < 10) {
+        return '0' + s;
+      } else {
+        return s;
+      }
+    }
+
+    /**
+     * Функция выводит день недели и число
+     **/
+    function getDate(dayWeek, month, date) {
+      var d = new Date();
+      date.innerHTML = dayWeek[d.getDay()] + ', ' + d.getDate();
+    }
+
+    /**
+     * Функция выводит месяц и год
+     **/
+    function getMainDate(d, blockDate, month) {
+      blockDate.innerHTML = month[d.getMonth()] + ' ' + d.getFullYear();
+    }
+  </script>
+</body>
+</html>
