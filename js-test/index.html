@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Тест</title>
+</head>
+<body>
+  <p><b>10.</b> Дан следующий массив с вопросами и вариантами ответов:</p>
+  <p>Реализуйте текст с вопросами и вариантами ответов. Каждый вопрос должен
+    быть в своем абзаце, а под ним - 5 радиокнопочек, с помощью которых можно
+    выбрать один из ответов. Если ответ правильный - вопрос должен покраситься
+    в зеленый цвет, а если неправильный - в красный.</p>
+  <!-- ================================================================== -->
+
+  <h2>Тест</h2>
+
+  <div id="parent_test">
+    <div class="group_list">
+      <p class="question"></p>
+        <ol class="group_answer">
+          <li><input type="radio"><span class="answer"></span></li>
+          <li><input type="radio"><span class="answer"></span></li>
+          <li><input type="radio"><span class="answer"></span></li>
+          <li><input type="radio"><span class="answer"></span></li>
+          <li><input type="radio"><span class="answer"></span></li>
+        </ol>
+      <p class="right"></p>
+    </div>
+    <div class="group_list">
+      <p class="question"></p>
+        <ol class="group_answer">
+          <li><input type="radio"><span class="answer"></span></li>
+          <li><input type="radio"><span class="answer"></span></li>
+          <li><input type="radio"><span class="answer"></span></li>
+          <li><input type="radio"><span class="answer"></span></li>
+          <li><input type="radio"><span class="answer"></span></li>
+        </ol>
+      <p class="right"></p>
+    </div>
+    <div class="group_list">
+      <p class="question"></p>
+        <ol class="group_answer">
+          <li><input type="radio"><span class="answer"></span></li>
+          <li><input type="radio"><span class="answer"></span></li>
+          <li><input type="radio"><span class="answer"></span></li>
+          <li><input type="radio"><span class="answer"></span></li>
+          <li><input type="radio"><span class="answer"></span></li>
+        </ol>
+      <p class="right"></p>
+    </div>
+  </div>
+
+  <style>
+    .group_list {
+      border-bottom: 1px solid #000;
+    }
+
+    .group_list:first-child {
+      border-top: 1px solid #000;
+    }
+
+    .right {
+      color: #0f0;
+    }
+
+    .wrong {
+      color: #f00;
+    }
+  </style>
+
+  <script>
+  function groupArrayTest() {
+    var groupArray = [
+      {
+        question: '1. Что будут выведено в консоли? <br>' +
+                  'var str; <br>' +
+                  'var i = "0"; <br>' +
+                  'console.log(str + i);',
+        answer: [
+          '0',
+          'NaN',
+          'undefined0',
+          'undefined',
+          'null0',
+        ],
+        right: 3,
+      },
+      {
+        question: '2. Что выведет консоль? <br>' +
+                  'console.log(typeof typeof null);',
+        answer: [
+          '"string"',
+          '"object"',
+          '"undefined"',
+          '"function"',
+          '"null"',
+        ],
+        right: 1,
+      },
+      {
+        question: '3. Каким будет значение переменной out после выполнения метода? <br>' +
+                  'var msg = "Welcome to JavaScript"; <br>' +
+                  'var out = msg.substr(3, 3);',
+        answer: [
+          'Пустая строка',
+          'ome',
+          'Возникнет синтаксическая ошибка',
+          'com',
+          'lco',
+        ],
+        right: 4,
+      },
+    ];
+
+    return groupArray;
+  }
+
+  // Вывеведем вопосы на стараницу документа
+  addQuestionAndRight();
+
+  // Вывеведем ответы на страницу документа
+  addAndGetGroupAnswer();
+
+  // Выполнение событий теста
+  eventTest();
+
+  /**
+   * Функция добавляет вопросы на страницу документа из асс. массива.
+   * Так же записываем правильный ответ в созданный атрибут.
+   **/
+  function addQuestionAndRight() {
+    var groupArrayAnswer = groupArrayTest();
+    var groupList = document.getElementsByClassName('group_list');
+
+    for (var i = 0; i < groupList.length; i++) {
+
+      for (var j = 0; j < groupList[i].children.length; j++) {
+
+        if (groupList[i].children[j].className === 'right') {
+          groupList[i].children[j].setAttribute('data-right', groupArrayAnswer[i].right);
+        } else if (groupList[i].children[j].className === 'question') {
+          groupList[i].children[j].innerHTML = groupArrayAnswer[i].question;
+        }
+      }
+    }
+  }
+
+  /**
+   * Функция добавляет список ответов на старницу документа из асс. массива
+   **/
+  function addAndGetGroupAnswer() {
+    var groupArrayAnswer = groupArrayTest();
+    var gA = document.getElementsByClassName('group_answer');
+
+    for (var i = 0; i < gA.length; i++) {
+
+      for (var j = 0; j < gA[i].children.length; j++) {
+
+        for (var k = 0; k < gA[i].children[j].children.length; k++) {
+
+          if (gA[i].children[j].children[k].hasAttribute('type')) {
+            gA[i].children[j].children[k].setAttribute('value', groupArrayAnswer[i].answer[j]);
+            gA[i].children[j].children[k].setAttribute('data-answer', (j + 1));
+          } else if (gA[i].children[j].children[k].className == 'answer') {
+            gA[i].children[j].children[k].innerHTML = groupArrayAnswer[i].answer[j];
+          }
+        }
+      }
+    }
+  }
+
+  /**
+   * Функция собатий выбора правильных ответов
+   **/
+  function eventTest() {
+    var groupList = document.querySelectorAll('.group_list');
+
+    for (var i = 0; i < groupList.length; i++) {
+      groupList[i].addEventListener('click', function (e) {
+
+        if (e.target.closest('input')) {
+          var blockAnswer = e.target.closest('ol').children;
+          var rightAnswer = e.target.closest('div').lastElementChild.getAttribute('data-right');
+          var thisAnswer = e.target.closest('input').getAttribute('data-answer');
+
+          for (var i = 0; i < blockAnswer.length; i++) {
+
+            for (var j = 0; j < blockAnswer[i].children.length; j++) {
+              blockAnswer[i].children[j].checked = false;
+              blockAnswer[i].children[j].classList.remove('wrong');
+              blockAnswer[i].children[j].classList.remove('right');
+            }
+          }
+
+          e.target.closest('input').checked = true;
+
+          if (thisAnswer == rightAnswer) {
+            e.target.nextElementSibling.classList.add('right');
+          } else {
+            e.target.nextElementSibling.classList.add('wrong');
+          }
+        }
+      });
+    }
+  }
+  </script>
+
+</body>
+</html>
