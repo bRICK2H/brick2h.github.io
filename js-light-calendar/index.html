@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>LightCalendar</title>
+</head>
+<body>
+  <h2>Календарик</h2>
+  <div>
+    <div id="parent">
+      <button id="button_back"></button>
+      <p id="set_date">дата</p>
+      <button id="button_next"></button>
+    </div>
+    <div id="parent_table"></div>
+  </div>
+
+  <style>
+    #parent {
+      width: 300px;
+      margin: 5px auto;
+      display: flex;
+      justify-content: center;
+      align-items: baseline;
+      border-radius: 10px;
+      background: #444;
+    }
+
+    #set_date {
+      width: 150px;
+      color: #fff;
+      font-size: 20px;
+      text-align: center;
+    }
+
+    #button_back, #button_next {
+      font-size: 20px;
+      border: none;
+      outline: none;
+      background: #999;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    #button_back:hover,
+    #button_next:hover {
+      background: #eee;
+      border-radius: 5px;
+    }
+
+    #parent_table {
+      display: flex;
+      justify-content: center;
+    }
+
+    td {
+      width: 25px;
+      height: 25px;
+      text-align: center;
+      line-height: 25px;
+      font-size: 18px;
+      background: #ddd;
+    }
+
+    .today {
+      color: #fff;
+      background: #444;
+    }
+
+    .weekend {
+      color: #fff;
+      background: green;
+    }
+  </style>
+
+  <script>
+    var buttonBack = document.getElementById('button_back');
+    var buttonNext = document.getElementById('button_next');
+    var parentTable = document.getElementById('parent_table');
+    var setDate = document.getElementById('set_date');
+    var MONTH = [
+      'Январь', 'Февраль', 'Март',
+      'Апрель', 'Май', 'Июнь',
+      'Июль', 'Август', 'Сентябрь',
+      'Октябрь', 'Ноябрь', 'Декабрь',
+    ];
+    var countDate = 0;
+
+    // Функция выводит стрелки для кнопок.
+    styleDate();
+
+    // Функция выводит год и месяц на настоящее время.
+    showFirstDate();
+
+    // Вызов предыдущей даты
+    buttonBack2();
+
+    // Вызов следующей даты
+    buttonNext2();
+
+    /**
+     * Функция события увелививает месяц и год назад.
+     **/
+    function buttonBack2() {
+      buttonBack.addEventListener('click', function () {
+        parentTable.removeChild(document.getElementsByTagName('table')[0]);
+        countDate--;
+        showFirstDate();;
+      });
+    }
+
+    /**
+     * Функция события увелививает месяц и год вперед.
+     **/
+    function buttonNext2() {
+      buttonNext.addEventListener('click', function () {
+        parentTable.removeChild(document.getElementsByTagName('table')[0]);
+        countDate++;
+        showFirstDate();
+      });
+    }
+
+    /**
+     * Функция установливает год и месяц на настоящее время.
+     * Так же отмечает сегоднешний день.
+     **/
+    function showFirstDate() {
+      var d = new Date();
+      var setMonth = d.setMonth(d.getMonth() + countDate);
+      var day = 32 - new Date(d.getFullYear(), d.getMonth(), 32).getDate();
+      setDate.innerHTML = d.getFullYear() + ' ' + MONTH[d.getMonth()];
+      var today = null;
+
+      if (countDate == 0) {
+        var today = d.getDate();
+      }
+
+      createTable();
+      createTd(day, today, d);
+    }
+
+    /**
+     * Функция создает таблицу с рядом.
+     **/
+    function createTable(tr) {
+      var table = document.createElement('table');
+      var tr = document.createElement('tr');
+      table.appendChild(tr);
+      parentTable.appendChild(table);
+    }
+
+    /**
+     * Функция создает ячейки и помещяет в себя числа выбранного месяца
+     * Так же отмечает выходные дни.
+     **/
+    function createTd(day, today, d) {
+      for (var i = 1; i <= day; i++) {
+        var td = document.createElement('td');
+        var weekend = new Date(d.getFullYear(), d.getMonth(), i).getDay();
+        td.innerHTML = i;
+        document.getElementsByTagName('tr')[0].appendChild(td);
+
+        if (i == today) {
+          td.classList.add('today');
+        }
+
+        if (weekend == 6 || weekend == 0) {
+          td.classList.add('weekend');
+        }
+      }
+    }
+
+    /**
+     * Функция задает стрелки для кнопок.
+     **/
+    function styleDate() {
+      buttonBack.innerHTML = String.fromCharCode(8592);
+      buttonNext.innerHTML = String.fromCharCode(8594);
+    }
+  </script>
+</body>
+</html>
