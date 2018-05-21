@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Test</title>
+</head>
+<body>
+  <h1>Тест вопрос-ответ</h1>
+
+  <div id="parent_div">
+    <input type="text" id="answer">
+    <button id="get_answer">Ответить</button>
+  </div>
+  <button id="button" disabled>Следующий вопрос</button>
+  <p id="array_answers"></p>
+
+  <style>
+    #button {
+      margin-top: 5px;
+    }
+
+    .ul {
+      display: none;
+    }
+
+    .green {
+      color: green;
+    }
+
+    .red {
+      color: red;
+    }
+  </style>
+
+  <script>
+    // Выводит вопросы из массива
+    performQuestion();
+
+    // Выводит ответы из массива и воспрос с ответами
+    performAnswer();
+
+    /**
+     * Функция выодит массив ответов в прямо эфире.
+     * Так же функция выводит вопросы и ответы.
+     **/
+    function performAnswer() {
+      getAnswerToArray();
+      getAnswerToQuestion();
+    }
+
+    /**
+     * Глобальная функция массива с вопросами.
+     **/
+    function questionFunction() {
+      var question = [
+        'Есть ли разница между выражениями? !!(a && b) и (a && b)',
+        'Что получиться, если сложить true + false?',
+        'Равны ли переменнные a == b? Если a = [1, 2] и b = [1, 2]',
+        'Что выведет alert("1"[0])?',
+      ];
+
+      return question;
+    }
+
+    /**
+     * Глобальная функция массива с правильными ответами.
+     **/
+    function correctAnswers() {
+      var correct = [
+        'нет',
+        '1',
+        'нет',
+        'undefined',
+      ];
+
+      return correct;
+    }
+
+    /**
+     * Функция события, выводит вопросы массива в зоне видимости документа
+     **/
+    function performQuestion() {
+      var question = questionFunction();
+      var answer = document.getElementById('answer');
+      var button = document.getElementById('button');
+      var getAnswer = document.getElementById('get_answer');
+      var count = 0;
+
+      // Функция выводит первый вопрос на экран документа
+      createText((count + 1) + '-й вопрос: ' + question[count]);
+
+      button.addEventListener('click', function () {
+        var text = document.querySelector('.ques');
+        count++;
+
+        // Заменяем вопросы в созданном параграфе
+        text.innerHTML = (count + 1) + '-й вопрос: ' + question[count];
+
+        if (count == question.length) {
+          this.disabled = true;
+          text.innerHTML = 'Вопросы закончились!';
+          document.querySelector('.ul').classList.remove('ul');
+        }
+
+        if (!this.disabled) {
+          this.disabled = true;
+          getAnswer.disabled = false;
+          answer.disabled = false;
+        }
+      });
+    }
+
+    /**
+     * Функция события, формирует массив из ответов пользователя
+     **/
+    function getAnswerToArray() {
+      var arrayAnswers = document.getElementById('array_answers');
+      var answer = document.getElementById('answer');
+      var arr = [];
+      createUl();
+
+      answer.addEventListener('change', function (e) {
+        arr.push(e.target.value);
+        e.target.setAttribute('data-answer', this.value);
+        e.target.value = '';
+        arrayAnswers.innerHTML = 'Ответы пользователя :' + arr;
+
+        if (!this.disabled) {
+          this.disabled = true;
+        }
+      });
+    }
+
+    /**
+     * Функция события, формирует список вопроса и ответа пользователя
+     **/
+    function getAnswerToQuestion() {
+      var getAnswer = document.getElementById('get_answer');
+      var button = document.getElementById('button');
+      var question = questionFunction();
+      var correct = correctAnswers();
+      var count = 0;
+
+      getAnswer.addEventListener('click', function (e) {
+        var answerUser = e.target.previousElementSibling.getAttribute('data-answer');
+        count++;
+
+        // Создаем и выводим вопросы
+        createLi(question[count - 1]);
+
+        if (answerUser == correct[count - 1]) {
+          // Создает и выводим ответы пользователя и добавляем класс 'green'
+          createSpan(' - ' + answerUser, (count - 1), 'green');
+        } else {
+          // Создает и выводим ответы пользователя и добавляем класс 'red'
+          createSpan(' - ' + answerUser, (count - 1), 'red');
+          createSpan(' <br>Правильный ответ: ' + correct[count - 1], (count - 1));
+        }
+
+        if (!this.disabled) {
+          this.disabled = true;
+          button.disabled = false;
+        }
+      });
+    }
+
+    /**
+     * Функция создает текстовый элемент, для записи вопроса.
+     **/
+    function createText(text) {
+      var div = document.getElementById('parent_div');
+      var p = document.createElement('p');
+      p.innerHTML = text;
+      p.classList.add('ques');
+
+      div.parentNode.insertBefore(p, div);
+    }
+
+    /**
+     * Функция создает родителя списка
+     **/
+    function createUl() {
+      var button = document.getElementById('button');
+      var ul = document.createElement('ul');
+      ul.classList.add('ul');
+      button.parentNode.appendChild(ul);
+    }
+
+    /**
+     * Функция создает списки с вопросами
+     **/
+    function createLi(text) {
+      var li = document.createElement('li');
+      li.innerHTML = text;
+      document.getElementsByTagName('ul')[0].appendChild(li);
+    }
+
+    /**
+     * Функция создает span с ответами
+     **/
+    function createSpan(text, count, colorClass) {
+      var span = document.createElement('span');
+      span.classList.add(colorClass);
+      span.innerHTML = text;
+      document.getElementsByTagName('li')[count].appendChild(span);
+    }
+  </script>
+</body>
+</html>
