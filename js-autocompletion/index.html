@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Автодополнение</title>
+</head>
+<body>
+    <div id="container_country">
+      <h2>Автодополнение</h2>
+      <form action="" id="form_country">
+        <label for="country">Выберите подходящую страну: </label>
+        <input type="text" id="country" placeholder="Поиск..">
+      </form>
+    </div>
+
+    <style>
+      @import url('https://fonts.googleapis.com/css?family=Neucha');
+      html {
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-size: 10px;
+        font-family: 'Neucha', cursive;
+      }
+
+      #container_country {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        font-size: 2.6rem;
+      }
+
+      #form_country {
+        display: flex;
+        flex-direction: column;
+      }
+
+      #country {
+        height: 50px;
+        outline: none;
+        background: #444;
+        border: none;
+        border-radius: 10px;
+        margin: 20px 0 0 0;
+        text-align: center;
+        font-size: 2.6rem;
+        color: #fff;
+      }
+
+      #country::placeholder {
+        font-size: 2rem;
+      }
+
+      #parent_ul {
+        margin: 5px;
+        padding-left: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .list {
+        width: 100%;
+        height: 40px;
+        background: #ccc;
+        border-radius: 5px;
+        list-style: none;
+        margin-bottom: 2px;
+        text-align: center;
+        line-height: 40px;
+        cursor: pointer;
+      }
+
+      .list:hover {
+        background: #444;
+        color: #fff;
+      }
+    </style>
+
+      <script>
+      var countries = ['Абхазия', 'Азербайджан', 'Албания', 'Аргентина', 'Армения', 'Афганистан',
+      'Багамы', 'Беларусь', 'Бельгия', 'Болгария', 'Боливия', 'Бразилия', 'Бангладешь',
+      'Ватикан', 'Великобритания', 'Венгрия', 'Венесуэла', 'Вьетнам',
+      'Гавайи', 'Гаити', 'Гана', 'Гвинея', 'Германия', 'Гондурас', 'Гонконг', 'Грузия', 'Греция',
+      'Дания', 'Доминикана', 'Египет', 'Замбия', 'Зимбабве', 'Израиль', 'Индия', 'Индонезия',
+      'Ирак', 'Иран', 'Ирландия', 'Исландия', 'Испания', 'Италия', 'Йемен',
+      'Казахстан', 'Камдобжа', 'Камерун', 'Канада', 'Катар', 'Кения', 'Кипр', 'Киргизия',
+      'Латвия', 'Ливан', 'Литва', 'Люксембург', 'Маврикий', 'Мадагаскар', 'Мальта', 'Мексика',
+      'Непал', 'Нигерия', 'Нидерланды', 'ОАЭ', 'Пакистан', 'Панама', 'Перу', 'Польша',
+      'Португалия', 'Россия', 'Пумыния', 'Сенегал', 'Сербия', 'Сирия', 'Словакия', 'Словения',
+      'Таджикистан', 'Таиланд', 'Тунис', 'Турция', 'Унагда', 'Узберистан', 'Украина', 'Уругвай',
+      'Фиджи', 'Филиппины', 'Финляндия', 'Франция', 'Хорватия', 'Чад', 'Черногория', 'Чехия',
+      'Чили', 'Швейцария', 'Швеция', 'Шри-Ланка', 'Эквадор', 'Эстония', 'Эфиопия', 'Южная Корея',
+      'Ямайка', 'Япония'];
+
+      // Выводим родителя для списков на страницу
+      createParentUlForListCountry();
+
+      // Выводим совпавшие старны
+      eventScanCountry();
+
+      /**
+       * Функция создает родителя для списков
+       **/
+      function createParentUlForListCountry() {
+        var formCountry = document.getElementById('form_country');
+        var ul = document.createElement('ul');
+        ul.id = 'parent_ul';
+        formCountry.appendChild(ul);
+      }
+
+      /**
+       * Функция получает и возвращаеть селектор элементов
+       **/
+      function getSelector(selector) {
+        return document.getElementById(selector);
+      }
+
+      /**
+       * Функция создает списки
+       **/
+      function createListForCountry(text) {
+        var li = document.createElement('li');
+        li.innerHTML = text;
+        li.classList.add('list');
+        getSelector('parent_ul').appendChild(li);
+      }
+
+      /**
+       * Функция получает параметром строки стран массива,
+       * и в зависимотси от условия сортирует страны в списки
+       **/
+      function showList(str) {
+        getSelector('parent_ul').innerHTML = '';
+
+        for (var i = 0; i < countries.length; i++) {
+          if (countries[i].indexOf(str) != -1) {
+            createListForCountry(countries[i]);
+          }
+        }
+
+        // Получаем селекторы списков прошедших условие
+        addCountryToInput(document.querySelectorAll('.list'));
+      }
+
+      /**
+       * Функция собития ввода страны и получение списка совпавших
+       **/
+      function eventScanCountry() {
+        var country = getSelector('country');
+
+        country.addEventListener('keyup', function (e) {
+          var str = e.target.value;
+
+          if (
+              e.keyCode >= 65 && e.keyCode <= 90 ||
+              e.keyCode == 186 || e.keyCode == 188 ||
+              e.keyCode == 190 || e.keyCode == 219 ||
+              e.keyCode == 221 || e.keyCode == 122
+            ) {
+            showList(str);
+          } else if (e.keyCode == 8) {
+            showList(str.substr(0));
+
+            if (e.target.value == '') {
+              getSelector('parent_ul').innerHTML = '';
+            }
+          }
+        });
+      }
+
+      /**
+       * Функция события выбора стран
+       **/
+      function addCountryToInput(arr) {
+        var country = getSelector('country');
+        for (var i = 0; i < arr.length; i++) {
+          arr[i].addEventListener('click', function () {
+            country.value = this.innerHTML;
+            getSelector('parent_ul').innerHTML = '';
+          });
+        }
+      }
+      </script>
+</body>
+</html>
