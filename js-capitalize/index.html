@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="styles/style.css">
+  <script src="js/script.js"></script>
+  <title>Practical tasks</title>
+</head>
+<body>
+
+  <div class="container">
+    <h1 class="title">Калькулятор процентов, из расчета 12% годовых</h1>
+    <div class="container__calculate">
+      <div class="block__value">
+        <label class="label__position" for="amount">
+          <p>Сумма :</p>
+          <input id="amount" class="input__style" type="number" pattern="^[ 0-9]+$" maxlength="10" placeholder="10000">
+        </label>
+        <label class="label__position" for="period">
+          <p>Срок в месяцах :</p>
+          <select id="period" class="input__style">
+            <option value="3">3 (минимут)</option>
+            <option value="6">6 (полгода)</option>
+            <option value="12" selected>12 (год)</option>
+            <option value="18">18 (1.5 года)</option>
+            <option value="24">24 (2 года)</option>
+            <option value="30">30 (2.5 года)</option>
+            <option value="36">36 (3.5 года)</option>
+          </select>
+        </label>
+        <label  class="label__position" for="capitalize">
+          <p>С капитализацией :</p>
+          <input type="checkbox" id="capitalize">
+        </label>
+      </div>
+      <div class="block__diagram">
+        <div id="before">
+          <p>Было:</p>
+          <div class="before__diagram">
+            <p class="before__amount"></p>
+          </div>
+        </div>
+        <div id="after">
+          <p>Стало:</p>
+          <div class="after__diagram">
+            <p class="after__amount"></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
