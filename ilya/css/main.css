@@ -8,7 +8,7 @@ body {
 
   background-image: url('../image/main.jpg');
   background-color: #999;
-  background-position: center center;
+  background-position: 100% 30%;
   background-repeat: no-repeat;
   background-size: cover;
   background-attachment: fixed;
@@ -105,8 +105,17 @@ body {
     background-position: center center;
   }
 
+  .edit__button {
+    background-color: rgb(255, 255, 255, .7);
+    color: #fff;
+    font-size: 1.5em;
+    padding: .7em 1.5em;
+    border-radius: 40px;
+    text-decoration: none;
+  }
+
   .edit__symbol_right {
-    padding-top: 0px;
+    padding-top: 100px;
   }
 
   .table {
