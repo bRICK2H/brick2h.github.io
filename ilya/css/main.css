@@ -69,7 +69,7 @@ body {
 
 .edit__button {
   border: none;
-  background: rgb(255, 255, 255, .7);
+  background-color: rgb(255, 255, 255, .7);
   color: #000;
   font-size: 1.5em;
   padding: .7em 1.5em;
@@ -103,6 +103,10 @@ body {
 @media only screen and (max-device-width: 480px) {
   body {
     background-position: center center;
+  }
+
+  .edit__symbol_right {
+    padding-top: 50px;
   }
 
   .table {
