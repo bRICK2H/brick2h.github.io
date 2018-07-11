@@ -8,7 +8,7 @@ body {
 
   background-image: url('../image/main.jpg');
   background-color: #999;
-  background-position: center center;
+  background-position: 50% 30%;
   background-repeat: no-repeat;
   background-size: cover;
   background-attachment: fixed;
