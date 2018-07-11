@@ -8,7 +8,7 @@ body {
 
   background-image: url('../image/main.jpg');
   background-color: #999;
-  background-position: 50% 30%;
+  background-position: center 30%;
   background-repeat: no-repeat;
   background-size: cover;
   background-attachment: fixed;
@@ -102,11 +102,23 @@ body {
 
 @media only screen and (max-device-width: 480px) {
   body {
-    background-position: center 30%;
+    background-position: bottom center;
   }
-  
+
+  .main__content_text-right h1 {
+    font-size: 2em;
+  }
+
+  .edit__symbol_top {
+    font-size: 6em;
+  }
+
+  .edit__button {
+    border: 1px solid #fff;
+  }
+
   .edit__symbol_right {
-    padding-top: 10px;
+    padding-top: 100px;
   }
 
   .table {
