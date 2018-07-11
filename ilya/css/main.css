@@ -113,8 +113,12 @@ body {
     font-size: 6em;
   }
 
-  .edit__button {
-    border: 1px solid #fff;
+   .edit__button {
+    color: #000;
+    font-size: 1.5em;
+    padding: .5em 1em;
+    border-radius: 40px;
+    text-decoration: none;
   }
 
   .edit__symbol_right {
