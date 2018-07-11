@@ -110,11 +110,12 @@ body {
   }
 
   .edit__symbol_top {
-    font-size: 6em;
+    font-size: 4em;
   }
 
-   .edit__button {
-    color: #000;
+  .edit__button {
+    color: #fff;
+    background-color: #000;
     font-size: 1.5em;
     padding: .5em 1em;
     border-radius: 40px;
