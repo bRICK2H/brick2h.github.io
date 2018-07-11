@@ -8,7 +8,7 @@ body {
 
   background-image: url('../image/main.jpg');
   background-color: #999;
-  background-position: center center;
+  background-position: center 30%;
   background-repeat: no-repeat;
   background-size: cover;
   background-attachment: fixed;
@@ -19,15 +19,15 @@ body {
   height: 100vh;
   text-align: center;
   display: flex;
-  justify-content: space-between;
-  align-items: stretch;
+  /* justify-content: space-between; */
+  /* align-items: stretch; */
 }
 
 .main__content_text-top {
   flex-basis: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  /* justify-content: space-around; */
 }
 
 .main__content_text-right ul {
@@ -48,7 +48,7 @@ body {
 
 .main__content_text-right h1 {
   margin: 0;
-  font-size: 3em;
+  font-size: 4em;
 }
 
 .edit__symbol {
@@ -60,7 +60,7 @@ body {
   color: #fff;
   text-shadow: 2px 2px 2px #000;
   font-size: 6em;
-  padding: 5%;
+  margin: 30px;
 }
 
 .edit__symbol_right {
@@ -69,8 +69,9 @@ body {
 
 .edit__button {
   border: none;
-  background-color: rgb(255, 255, 255, .7);
-  color: #000;
+  background-color: rgba(0, 0, 0, .3);
+  border: 1px solid rgba(255, 255, 255, .3);
+  color: #fff;
   font-size: 1.5em;
   padding: .7em 1.5em;
   border-radius: 40px;
@@ -102,11 +103,32 @@ body {
 
 @media only screen and (max-device-width: 480px) {
   body {
-    background-position: center center;
+    background-position: bottom center;
+  }
+
+  .main__content_text-top {
+    justify-content: space-around;
+  }
+  .main__content_text-right h1 {
+    font-size: 2em;
+  }
+
+  .edit__symbol_top {
+    font-size: 3.5em;
+  }
+
+  .edit__button {
+    color: #fff;
+    background-color: rgba(0, 0, 0, .3);
+    border: 1px solid rgba(255, 255, 255, .3);
+    font-size: 1.5em;
+    padding: .5em 1em;
+    border-radius: 40px;
+    text-decoration: none;
   }
 
   .edit__symbol_right {
-    padding-top: 50px;
+    padding-top: 100px;
   }
 
   .table {
