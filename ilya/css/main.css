@@ -102,7 +102,7 @@ body {
 
 @media only screen and (max-device-width: 480px) {
   body {
-    background-position: center center;
+    background-position: center 30%;
   }
   
   .edit__symbol_right {
