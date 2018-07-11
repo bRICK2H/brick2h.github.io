@@ -105,17 +105,22 @@ body {
     background-position: bottom center;
   }
 
+  #main__content_text {
+
+    align-items: flex-start;
+  }
+
   .main__content_text-right h1 {
     font-size: 2em;
   }
 
   .edit__symbol_top {
-    font-size: 4em;
+    font-size: 3.5em;
   }
 
   .edit__button {
     color: #fff;
-    background-color: #000;
+    background-color: rgba(0, 0, 0, .5);
     font-size: 1.5em;
     padding: .5em 1em;
     border-radius: 40px;
