@@ -104,18 +104,9 @@ body {
   body {
     background-position: center center;
   }
-
-  .edit__button {
-    background-color: rgb(255, 255, 255, .7);
-    color: #fff;
-    font-size: 1.5em;
-    padding: .7em 1.5em;
-    border-radius: 40px;
-    text-decoration: none;
-  }
-
+  
   .edit__symbol_right {
-    padding-top: 100px;
+    padding-top: 10px;
   }
 
   .table {
