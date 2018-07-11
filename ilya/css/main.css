@@ -99,8 +99,12 @@ body {
   text-align: center;
 }
 
-@media screen, (max-width 720px) {
+@media only screen and (max-device-width: 480px) {
   body {
-    background-position: 50% 30%;
+    background-position: center center;
+  }
+
+  .table {
+    font-size: .5em;
   }
 }
