@@ -19,21 +19,12 @@ body {
   height: 100vh;
   text-align: center;
   display: flex;
-<<<<<<< HEAD
-  /* justify-content: space-between; */
-  /* align-items: stretch; */
-=======
->>>>>>> d7567e22c0bde666d0475f07412bd86de048640c
 }
 
 .main__content_text-top {
   flex-basis: 100%;
   display: flex;
   flex-direction: column;
-<<<<<<< HEAD
-  /* justify-content: space-around; */
-=======
->>>>>>> d7567e22c0bde666d0475f07412bd86de048640c
 }
 
 .main__content_text-right ul {

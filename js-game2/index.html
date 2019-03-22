@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
+		integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+	<link href="https://fonts.googleapis.com/css?family=Lato:100" rel="stylesheet" type="text/css">
+	<link rel="stylesheet" href="style.css">
+	<title>Game</title>
+</head>
+<body>
+	<div class="container">
+		<div class="settings settings__container">
+			<div class="settings__result">
+				<button class="settings__result-btn">Результат игры</button>
+			</div>
+			<div class="settings__level">
+				<select class="settings__level-field">
+					<option disabled selected>Сложность игры</option>
+					<option value="true">Обычная</option>
+					<option value="false">Сложная</option>
+				</select>
+			</div>
+		</div>
+		<div class="box box__container">
+			<h1 class="box__title">
+				<span class="box__title-item">Время игры:</span>
+				<span class="box__live-time"></span>
+				<div class="box__continue">
+					<button class="box__continue-item">Продолжить</button>
+				</div>
+			</h1>
+			<div class="field-game box__field-game">
+				<div class="field-game__square"></div>
+				<div class="field-game__result">
+					<span class="field-game__result-title">Ваш результат:</span>
+					<span class="field-game__result-score"></span>
+				</div>
+				<button class="field-game__start">
+					Начать
+				</button>
+			</div>
+			<div class="field-time box__field-time">
+				<label for="">Время игры: (сек)</label>
+				<input class="field-time__time" type="text" value="5" id="time">
+			</div>
+		</div>
+	</div>
+
+	<div class="modal">
+		<div class="box-message modal__box-message">
+			<i class="fas fa-times" data-close="true"></i>
+			<table class="box-message__table">
+				<thead class="box-message__head">
+					<tr class="box-message__row">
+						<th class="box-message__cell box-message__cell-head">Время</th>
+						<th class="box-message__cell box-message__cell-head">Результат</th>
+					</tr>
+				</thead>
+				<tbody class="box-message__body">
+					<!-- result -->
+				</tbody>
+			</table>
+		</div>
+	</div>
+	
+	<script src="script.js"></script>
+</body>
+</html>
