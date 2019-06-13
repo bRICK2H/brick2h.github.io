@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Snake game</title>
+</head>
+<body>
+	
+	<div class="startMenu startMenu--active">
+		<h1 class="startMenu__name">Змейка</h1>
+		<div class="content startMenu__content">
+			<div class="choose-field">
+				<label class="choose-field__label" for="size">Изменить размер игрового поля:</label>
+				<div class="tooltip">
+					<p class="tooltip__msg"></p>
+				</div>
+				<input class="choose-field__size" type="text" value="15x20" id="size">
+			</div>
+			<div class="start-game">
+				<a class="start-game__button" href="#">
+					Начать игру
+				</a>
+			</div>
+		</div>
+	</div>
+	
+	<div class="container"></div>
+
+</body>
+</html>

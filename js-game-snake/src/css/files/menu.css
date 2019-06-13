@@ -1,0 +1,118 @@
+.startMenu {
+	background: radial-gradient(circle,#ffffff, #444);
+	width: 100%;
+	height: 100vh;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	opacity: 1;
+	display: none;
+}
+.startMenu--active {
+	display: flex;
+}
+.startMenu__name {
+	font-size: 3rem;
+	font-weight: 600;
+	color: #444;
+	margin-bottom: 1rem;
+}
+.startMenu__content {
+	padding: 2rem;
+}
+.content {
+	border-radius: 1rem;
+	background: #444;
+}
+.choose-field {
+	display: flex;
+	flex-direction: column;
+	margin-bottom: 2.5rem;
+	position: relative;
+}
+.choose-field__label {
+	color: #fefefe;
+	font-size: 1.8rem;
+	margin-bottom: 7rem;
+}
+.choose-field__size {
+	width: 50%;
+   margin: auto;
+	font-size: 1.7rem;
+	text-align: center;
+	color: #444;
+	border: none;
+	padding: 1rem 0;
+}
+.start-game {
+	text-align: center;
+}
+.start-game__button {
+	display: inline-block;
+	font-size: 1.6rem;
+	border-radius: 2rem;
+	background: #005aff;
+	background: linear-gradient(180deg, #3c6dc7, #005aff);
+	text-decoration: none;
+	color: #fff;
+	padding: 1rem 3rem;
+}
+.start-game__button:hover {
+	background: linear-gradient(180deg, #005aff, #3c6dc7);
+	box-shadow: 1px 1px 4px #3c6dc7, -1px -1px 4px #005aff;
+	animation: test .8s ease-in-out;
+}
+@keyframes test {
+	0% {
+		transform: rotate(1deg);
+	}
+	25% {
+		transform: rotate(-1deg);
+	}
+	50% {
+		transform: rotate(1deg);
+	}
+	75% {
+		transform: rotate(-1deg);
+	}
+	100% {
+		transform: rotate(1deg);
+	}
+}
+.start-game__button:active {
+	background: #31823e;
+	box-shadow: none;
+	transition: .5s linear;
+}
+.tooltip {
+	background: #e85c5c;
+	padding: 1rem 2rem;
+	border-radius: 2rem;
+	position: absolute;
+	left: 50%;
+	bottom: 50px;
+	transform: translateX(-50%);
+	opacity: 0;
+	display: none;
+}
+.tooltip::after {
+	content: '';
+	width: 15px;
+	height: 15px;
+	position: absolute;
+	bottom: -15px;
+	left: 50%;
+	transform: translateX(-50%);
+	background: #e85c5c;
+	clip-path: polygon(0 0, 100% 0, 50% 50%);
+}
+.tooltip--active {
+	width: 75%;
+	display: block;
+}
+.tooltip__msg {
+	font-size: 1.5rem;
+	color: #fff;
+	text-align: center;
+}

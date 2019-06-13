@@ -1,0 +1,49 @@
+.field {
+	margin: 2.5rem auto 2.5rem;
+	padding: 3rem;
+	background: #333;
+	box-shadow: 0 0 50px #000;
+	opacity: 1;
+	display: none;
+	flex-wrap: wrap;
+}
+.field--active {
+	display: flex;
+}
+.field__cell {
+	width: 25px;
+	height: 25px;
+	box-shadow: inset 1px 1px 0 #424242, 1px 1px 0 #424242;
+	position: relative;
+}
+.field__cell--active {
+	width: 5px;
+	height: 5px;
+	background: #c7ffc6;
+	border-radius: 50%;
+	box-shadow: 0 0 2px #c7ffc6;
+
+	position: absolute;
+	left: 55%;
+	top: 53%;
+	z-index: 5;
+	transform: translate(-50%, -50%);
+	animation: active 1.2s ease-in infinite;
+}
+@keyframes active {
+	50% {
+		padding: 8px;
+		background: #60ff5d;
+		box-shadow: 0 0 15px #60ff5d;
+	}
+}
+.field__cell--aim {
+	opacity: 1;
+	animation: boom .6s ease-in;
+}
+@keyframes boom {
+	100% {
+		opacity: 0;
+		padding: 75px;
+	}
+}
