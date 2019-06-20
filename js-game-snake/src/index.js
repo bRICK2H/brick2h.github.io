@@ -4,7 +4,8 @@ import {
 	_getRegExp,
 	_opacityUp,
 	_opacityDown,
-	_saveSettings
+	_saveSettings,
+	_setHint,
 } from './js/helpers';
 
 import StartGame from './js/modules/startgame';
@@ -16,6 +17,8 @@ import StartGame from './js/modules/startgame';
 		const menu 			= document.querySelector('.startMenu');
 		const tooltip 		= document.querySelector('.tooltip');
 		const tooltipMsg 	= document.querySelector('.tooltip__msg');
+
+		_setHint(true);
 
 		// Создание игрового поля, если пройдена валидация
 		btn.addEventListener('click', () => {
@@ -43,7 +46,6 @@ import StartGame from './js/modules/startgame';
 
 			// Удалить основное меню
 			_opacityDown(menu, 'startMenu--active', 20, false, () => {
-				console.log('start');
 				// Создаем игру с выбранными настройками
 				new StartGame(settings);
 			});

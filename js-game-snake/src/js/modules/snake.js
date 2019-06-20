@@ -1,10 +1,18 @@
 import Popup from './popup';
+import {
+	_setHint,
+	_getHint
+} from '../helpers';
 
 export default class Snake {
 	constructor(options) {
+		this.field = document.querySelector('.field');
 		this.cells = document.querySelectorAll('.field__cell');
 		this.activeCells = document.querySelectorAll('.field__cell--active');
 		this.navCount = document.querySelector('.nav__count');
+
+		// Вывести подсказку
+		if (_getHint()) this.createHintToStart();
 
 		this.x = options.x; // колличесво ячеек по x
 		this.y = options.y; // колличество ячеек по y
@@ -57,8 +65,33 @@ export default class Snake {
 		});
 	}
 
+	// Создание подсказки при первом запуске игры
+	createHintToStart() {
+		let boxHint = document.createElement('div');
+		let hint = document.createElement('p');
+
+		boxHint.classList.add('field__box-hint');
+		hint.classList.add('field__hint');
+		hint.innerText = 'Задайте направление змейке, за счет стрелок';
+
+		boxHint.appendChild(hint);
+		this.field.appendChild(boxHint);
+	}
+
+	// Удалить подсказку
+	removeHint() {
+		const hint = document.querySelector('.field__box-hint');
+		hint.remove();
+	}
+
 	// Событие направления змеи
 	snakeDirection(e) {
+
+		if (_getHint()) {
+			_setHint(false);
+			this.removeHint();
+		}
+
 		let key = e.keyCode;
 		this.continue = true;
 		this.arrayKeys.push(key);
@@ -84,7 +117,7 @@ export default class Snake {
 		}
 
 		if (!this.continue) return;
-		// clearInterval(this.intervalId);
+
 		this.autoDirection(key);
 	}
 
@@ -286,7 +319,6 @@ export default class Snake {
 		clearInterval(interval);
 		document.removeEventListener('keydown', this.eventSnakeDirection);
 		let [firstHead, ...allSnake] = this.snakePositions.reverse();
-		console.log(allSnake);
 
 		this.cells.forEach(cell => {
 			if (+cell.dataset.id === firstHead) {

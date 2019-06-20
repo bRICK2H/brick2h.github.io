@@ -3,7 +3,9 @@ export {
 	_opacityUp,
 	_opacityDown,
 	_saveSettings,
-	_getSettings
+	_getSettings,
+	_setHint,
+	_getHint
 };
 
 // Получить динамическую регулярку валидации
@@ -82,4 +84,15 @@ function _saveSettings(settings) {
 // Получить настройки игры
 function _getSettings() {
 	return JSON.parse(localStorage.getItem('settings'));
+}
+
+// Установить подсказку
+function _setHint(bool) {
+	localStorage.setItem('hint', bool);
+}
+
+// Получить подсказку
+function _getHint() {
+	// return Boolean(localStorage.getItem('hint'));
+	return JSON.parse(localStorage.getItem('hint'));
 }

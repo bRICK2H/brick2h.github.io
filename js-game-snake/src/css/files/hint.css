@@ -1,0 +1,53 @@
+.field__box-hint {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	z-index: 100;
+	transform: translateX(-50%);
+}
+.field__hint {
+	max-width: 155px;
+	background: rgba(0,0,0,.6);
+	border-radius: 10px;
+	padding: 10px;
+	font-size: 1.2rem;
+	color: #fff;
+	text-align: center;
+	animation: hint 1.5s linear;
+}
+
+/* @keyframes hint {
+	0% {
+		transform: scale(1.1);
+	}
+	50% {
+		transform: scale(1);
+	}
+	100% {
+		transform: scale(1.1);
+	}
+} */
+
+@keyframes hint {
+	0% {
+		transform: scale(0);
+	}
+	50% {
+		transform: scale(1);
+	}
+	60% {
+		transform: rotate(1deg);
+	}
+	70% {
+		transform: rotate(-1deg);
+	}
+	80% {
+		transform: rotate(1deg);
+	}
+	90% {
+		transform: rotate(-1deg);
+	}
+	100% {
+		transform: scale(0deg);
+	}
+}
