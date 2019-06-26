@@ -3,7 +3,7 @@
 	top: 50%;
 	left: 50%;
 	z-index: 100;
-	transform: translateX(-50%);
+	transform: translate(-50%, -50%);
 }
 .field__hint {
 	max-width: 155px;
@@ -15,18 +15,6 @@
 	text-align: center;
 	animation: hint 1.5s linear;
 }
-
-/* @keyframes hint {
-	0% {
-		transform: scale(1.1);
-	}
-	50% {
-		transform: scale(1);
-	}
-	100% {
-		transform: scale(1.1);
-	}
-} */
 
 @keyframes hint {
 	0% {
