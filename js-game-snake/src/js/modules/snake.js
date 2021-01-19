@@ -243,8 +243,8 @@ export default class Snake {
 			// Визуальное окрашивание змеи при ее росте
 			for (let i = this.snakePositions.length - 2; i >= 0; i--) {
 				if (+cell.dataset.id === this.snakePositions[i]) {
-					if (cell.childNodes.length) {
-						cell.childNodes.forEach(snake => {
+					if (cell.children.length) {
+						cell.children.fEach(snake => {
 							if (snake.classList.contains('field__cell--snake')) {
 								if (!this.endGame) {
 									snake.style.background = this.stringRgbSnake[i];
@@ -327,8 +327,8 @@ export default class Snake {
 
 			for (let i = 0; i < allSnake.length; i++) {
 				if (+cell.dataset.id === allSnake[i]) {
-					if (cell.childNodes.length) {
-						cell.childNodes.forEach(snake => {
+					if (cell.children.length) {
+						cell.children.fEach(snake => {
 							snake.classList.add('field__cell--end');
 						})
 					}
@@ -402,7 +402,7 @@ export default class Snake {
 	deleteActiveCells(catchId) {
 		this.cells.forEach((e) => {
 			if (+e.dataset.id === catchId) {
-				e.childNodes.forEach(active => {
+				e.children.fEach(active => {
 					if (active.classList.contains('field__cell--active')) {
 						active.classList.add('field__cell--aim');
 						setTimeout(() => {
@@ -463,12 +463,11 @@ export default class Snake {
 
 	}
 
-	// Цикл жизни змеи, пока они не врезалась сама в себя
 	crashSnake() {
 		let flag = false;
 		this.cells.forEach(cell => {
-			if (cell.childNodes.length) {
-				cell.childNodes.forEach(snake => {
+			if (cell.children.length) {
+				cell.children.fEach(snake => {
 					if (snake.classList.contains('field__cell--snake')) {
 						if (+snake.parentNode.dataset.id === this.snakePosition) {
 							flag = true;

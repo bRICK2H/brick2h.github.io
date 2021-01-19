@@ -93,6 +93,12 @@ function _setHint(bool) {
 
 // Получить подсказку
 function _getHint() {
-	// return Boolean(localStorage.getItem('hint'));
 	return JSON.parse(localStorage.getItem('hint'));
+}
+
+// Добавим аналог цикла forEach для HTMLCollection
+HTMLCollection.prototype.fEach = function(f) {
+	for(let i = 0; i < this.length; i++) {
+		f(this[i], [i], this);
+	}
 }
