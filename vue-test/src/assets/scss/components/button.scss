@@ -1,0 +1,21 @@
+.button {
+	font-size: 1.7rem;
+	font-weight: 600;
+	padding: .5rem 3rem;
+	border: none;
+	outline: none;
+	border-radius: 1.5rem;
+	background: #888;
+	box-shadow: .1rem .1rem .9rem #000;
+	cursor: pointer;
+	transition: .6s;
+
+	&:hover {
+		background: #bbb;
+		box-shadow: .1rem .1rem .6rem #000;
+	}
+	&:active {
+		transform: scale(.96);
+		box-shadow: .1rem .1rem .3rem #000;
+	}
+}
